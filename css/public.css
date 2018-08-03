@@ -1,0 +1,17 @@
+body,p,h1,h2,h3,h4,h5,h6,ul,li,input{
+	margin: 0;
+	padding: 0;
+	list-style: none;/*清除列表标签小圆点*/
+    font-family: AdobeHeitiStd-Regular;
+    font-size: 14px;/*10*/
+}
+a{
+	color: #333;
+	text-decoration: none;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
