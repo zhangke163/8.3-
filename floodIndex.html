@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>防汛防台形势图主页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="css/public.css">
+    <link rel="stylesheet" href="layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/floodIndex.css">
+    <link rel="stylesheet" type="text/css" href="css/screen.css">
+    <!--添加leaflet样式文件-->
+    <link rel="stylesheet" type="text/css" href="leaflet/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="css/L.Control.MousePosition.css">
+    <link rel="stylesheet" type="text/css" href="leaflet/leaflet.draw.css">
+    <script src="assets/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <script type="text/javascript" src="assets/dataLocal.js"></script>
+    <script type="text/javascript" src="assets/province.js"></script>
+    <script type="text/javascript" src="js/floodIndex.js"></script>
+    <!--添加leaflet引用-->
+    <script type="text/javascript" src="leaflet/leaflet-src.js"></script>
+    <script type="text/javascript" src="leaflet/esri-leaflet.js"></script>
+    <script type="text/javascript" src="leaflet/leaflet.ChineseTmsProviders.js"></script>
+    <script type="text/javascript" src="leaflet/L.Control.MousePosition.js"></script>
+    <script type="text/javascript" src="leaflet/leaflet.draw.js"></script>
+    <script type="text/javascript" src="assets/location.js"></script>
+    <script type="text/javascript">
+        var defaults = {
+            s1: 'provid',
+            s2: 'cityid',
+            s3: 'areaid',
+            v1: null,
+            v2: null,
+            v3: null
+        };
+
+    </script>
+</head>
+<body>
+<header>
+    <h1 class='left'>防汛防台管理系统</h1>
+    <ul class="right">
+        <li class='left borderh borderStyle'><a href="#">地图展示</a></li>
+        <li class='left borderh'><a href="dataManage.html">数据管理</a></li>
+        <li class='left line'></li>
+        <li class='left'>
+            <div class="people left"></div>
+            <div class="people-text left">管理员</div>
+            <div class="people-select left"><img src="images/pselect.png"></div>
+        </li>
+    </ul>
+</header>
+<section id='map-box'>
+    <div id="map" style="height: 100%;z-index: 0"></div>
+    <!-- 三级联动 -->
+    <div id='two-columns'>
+        <form class="layui-form" lay-filter='form-city'>
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <select name="provid" id="provid" lay-filter="provid">
+                        <option value="">请选择镇</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="cityid" id="cityid" lay-filter="cityid">
+                        <option value="">行政村</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="areaid" id="areaid" lay-filter="areaid">
+                        <option value="">自然村</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item buts-box">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="query" id='query' name='query'>查询</button>
+                    <button class="layui-btn" lay-submit lay-filter="img-result" id='img-result' name='img-result'>生成形势图</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 基本情况 -->
+    <div id="basic-info">
+        <div class="basic-info-title">基本情况</div>
+        <div class="basic-info-content">
+            <img src="images/111.jpg">
+            <div class="city-name">千丰村</div>
+            <p>浙江省湖州市南浔区中部</p>
+            <div id="city-detail">
+                千丰村位于大畈乡管理处，现有人口1378人，企业1家，地质灾害点1处，易受灾转移重点3户6间13人。村内有重要溪河1条山塘1座。
+            </div>
+        </div>
+        <!-- 图例 -->
+        <div id="cutline">
+            <div class="cutline-title">图例</div>
+            <div class="cutline-content"></div>
+        </div>
+        <!-- 底部防汛负责人 -->
+        <div id="bot-main">
+            <div class="bot-main-title">防汛负责人</div>
+            <div class="bot-main-content">
+                <div class="bot-small-cons left">
+                    <div class="small-name left">人员转移</div>
+                    <div class="name-box left"><span>陈荣贵</span><b>18738271122</b></div>
+                    <div class="name-box left"><span>陈礼升</span><b>18451641111</b></div>
+                </div>
+                <div class="bot-small-cons left">
+                    <div class="small-name left">监测预警</div>
+                    <div class="name-box left"><span>陈加金</span><b>13233456789</b></div>
+                    <div class="name-box left"><span>陈新潮</span><b>18675123300</b></div>
+                </div>
+                <div class="bot-small-cons left">
+                    <div class="small-name left">抢险救灾</div>
+                    <div class="name-box left"><span>陈加祥</span><b>17858626475</b></div>
+                    <div class="name-box left"><span>陈伟炉</span><b>18435155931</b></div>
+                </div>
+            </div>
+        </div>
+        <!-- 右侧小tab栏 -->
+        <ul id="tab-box">
+            <li class='left'>矢量图</li>
+            <li class="tab-active left">影像图</li>
+        </ul>
+        <!-- 右侧列表 -->
+        <div class="list-box-title">
+            <div class="titleImg"><img src="images/menu.svg"></div>
+            <form class="layui-form" lay-filter='form-search'>
+                <div class="layui-form-item left" style='width: 220px;height:46px;position: absolute;top:0;left: 65px;top:2px;font-size: 14px;'>
+                    <div class="layui-input-block" style='margin-left:0;'>
+                      <input type="text" name="" placeholder="综合查询" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item buts-box"style=''>
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="query" id='query' name='query' style='margin-right: -4px;'>查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="list-box" style="display: none;">
+            <div class="list-box-cons">
+                <ul id="tabbox">
+                    <li class='tab-active'>水库</li>
+                    <li>水闸</li>
+                    <li>涵闸</li>
+                    <li>隧洞</li>
+                    <li>桥梁</li>
+                    <li>危险区</li>
+                    <li>排涝泵站</li>
+                </ul>
+                <div class="list-contents">
+                    <ul class="cons-title">
+                        <li class="left">
+                            <b class="left" class="left"></b>
+                            <span class="left">大型</span>
+                        </li>
+                        <li class="left">
+                            <b class="left"></b>
+                            <span>中型</span>
+                        </li>
+                        <li class="left">
+                            <b class="left"></b>
+                            <span>小(一)型</span>
+                        </li>
+                        <li class="left">
+                            <b class="left"></b>
+                            <span>小(二)型</span>
+                        </li>
+                    </ul>
+                    <div class="cons-detail-box">
+                        <div class="det-box">
+                            <div class="small-detaill">
+                            <div class="detail-one">
+                                <div class="title-number left">1</div>
+                                <div class="title-name left">韩家坞水库</div>
+                                <div class='detail-btn right'>详细</div>
+                            </div>
+                            <div class="detail-two">
+                                <div class="left-con left">
+                                    <span class='left'>编号</span>
+                                    <b class='right'>B3301090918</b>
+                                </div>
+                                <div class="right-con right">
+                                    <span class='left'>容积(万方)</span>
+                                    <b class='right'>7.6</b>
+                                </div>
+                            </div>
+                            <div class="detail-three">
+                                <div class="left-con left">
+                                    <span class='left'>管理单位</span>
+                                    <b class='right'>市政管理局</b>
+                                </div>
+                                <div class="right-con right">
+                                    <span class='left'>维度</span>
+                                    <b class='right'>120.25</b>
+                                </div>
+                            </div>
+                            <div class="detail-four">
+                                <div class="left-con left">
+                                    <span class='left'>负责人</span>
+                                    <b class='right'>杨锋13923421100</b>
+                                </div>
+                                <div class="right-con right">
+                                    <span class='left'>经度</span>
+                                    <b class='right'>30.24</b>
+                                </div>
+                            </div>
+                            <div class="detail-five">
+                                <div class="left-five left">
+                                    <span class='left'>所属地区</span>
+                                    <b class='right'>南浔区菱湖镇千丰村</b>
+                                </div>
+                                <div class="right-five right">
+                                    <img src="images/icon.svg" class='right'>
+                                </div>
+                            </div>
+                           </div>
+                           <!-- 详细内容区域 -->
+                           <div class="detail-area">
+                               <div class="areas-one">
+                                   <div class="areas-one-con">
+                                       韩家坞水库建于1967年7月,大坝为均质土坝,最大坝高13.5米,坝顶黄海高程29.6米,坝顶宽4.5米,坝顶长1165米,保证灌溉面积1733.30公顷,以防洪灌溉为主,兼发电养鱼。
+                                   </div>
+                               </div>
+                               <div class="areas-two">
+                                   <ul class="areas-two-imgbox">
+                                       <li class='left'><img src="images/21.jpg"></li>
+                                       <li class='left'><img src="images/22.jpg"></li>
+                                       <li class='left'><img src="images/23.jpg"></li>
+                                   </ul>
+                                   实景图片
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>编号</span></div>
+                                   <div class="bottom-areas"><span class='right'>B3301090918</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>容积(万方)</span></div>
+                                   <div class="bottom-areas"><span class='right'>7.6</span></div>
+                               </div>
+                               <div class="areas-three">
+                                    <div class="three-left left">
+                                        <div class="top-areas"><span class='left'>经度</span></div>
+                                        <div class="bottom-areas"><span class='right'>30.24</span></div>
+                                    </div>
+                                    <div class="three-right right">
+                                        <div class="top-areas"><span class='left'>经度</span></div>
+                                        <div class="bottom-areas"><span class='right'>30.24</span></div>
+                                    </div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>管理单位</span></div>
+                                   <div class="bottom-areas"><span class='right'>市政管理局</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>负责人</span></div>
+                                   <div class="bottom-areas"><span class='right'>杨锋13923421100</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>巡查员</span></div>
+                                   <div class="bottom-areas"><span class='right'>杨那13923421101</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>建成日期</span></div>
+                                   <div class="bottom-areas"><span class='right'>1998.12.22</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>设计局</span></div>
+                                   <div class="bottom-areas"><span class='right'>杭州设计局</span></div>
+                               </div>
+                               <div class="areas-four">
+                                   <div class="top-areas"><span class='left'>危险加固记录</span></div>
+                                   <div class="four-areas">
+                                       <div class="four-areas-time left">1988.3</div>
+                                       <div class="four-areas-cons right">对灌溉涵管出现的蜂窝、管内壁砂浆剥蚀采取PCC-84型材料补强</div>
+                                   </div>
+                                   <div class="four-areas">
+                                       <div class="four-areas-time left">1996.3</div>
+                                       <div class="four-areas-cons right">对洪湖水库大坝外坡进行滤层翻修,兴建"W"导渗沟等工程</div>
+                                   </div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>施工单位</span></div>
+                                   <div class="bottom-areas"><span class='right'>中铁施工局</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>正常水位</span></div>
+                                   <div class="bottom-areas"><span class='right'>40.2m</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>汛限水位</span></div>
+                                   <div class="bottom-areas"><span class='right'>52.0m</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>防洪水位</span></div>
+                                   <div class="bottom-areas"><span class='right'>55.0m</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>校核洪水位</span></div>
+                                   <div class="bottom-areas"><span class='right'>40.06m</span></div>
+                               </div>
+                           </div>
+                        </div>
+                        <div class="det-box">
+                            <div class="small-detaill">
+                            <div class="detail-one">
+                                <div class="title-number left">1</div>
+                                <div class="title-name left">韩家坞水库</div>
+                                <div class='detail-btn right'>详细</div>
+                            </div>
+                            <div class="detail-two">
+                                <div class="left-con left">
+                                    <span class='left'>编号</span>
+                                    <b class='right'>B3301090918</b>
+                                </div>
+                                <div class="right-con right">
+                                    <span class='left'>容积(万方)</span>
+                                    <b class='right'>7.6</b>
+                                </div>
+                            </div>
+                            <div class="detail-three">
+                                <div class="left-con left">
+                                    <span class='left'>管理单位</span>
+                                    <b class='right'>市政管理局</b>
+                                </div>
+                                <div class="right-con right">
+                                    <span class='left'>维度</span>
+                                    <b class='right'>120.25</b>
+                                </div>
+                            </div>
+                            <div class="detail-four">
+                                <div class="left-con left">
+                                    <span class='left'>负责人</span>
+                                    <b class='right'>杨锋13923421100</b>
+                                </div>
+                                <div class="right-con right">
+                                    <span class='left'>经度</span>
+                                    <b class='right'>30.24</b>
+                                </div>
+                            </div>
+                            <div class="detail-five">
+                                <div class="left-five left">
+                                    <span class='left'>所属地区</span>
+                                    <b class='right'>南浔区菱湖镇千丰村</b>
+                                </div>
+                                <div class="right-five right">
+                                    <img src="images/icon.svg" class='right'>
+                                </div>
+                            </div>
+                           </div>
+                           <!-- 详细内容区域 -->
+                           <div class="detail-area">
+                               <div class="areas-one">
+                                   <div class="areas-one-con">
+                                       韩家坞水库建于1967年7月,大坝为均质土坝,最大坝高13.5米,坝顶黄海高程29.6米,坝顶宽4.5米,坝顶长1165米,保证灌溉面积1733.30公顷,以防洪灌溉为主,兼发电养鱼。
+                                   </div>
+                               </div>
+                               <div class="areas-two">
+                                   <ul class="areas-two-imgbox">
+                                       <li class='left'><img src="images/21.jpg"></li>
+                                       <li class='left'><img src="images/22.jpg"></li>
+                                       <li class='left'><img src="images/23.jpg"></li>
+                                   </ul>
+                                   实景图片
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>编号</span></div>
+                                   <div class="bottom-areas"><span class='right'>B3301090918</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>容积(万方)</span></div>
+                                   <div class="bottom-areas"><span class='right'>7.6</span></div>
+                               </div>
+                               <div class="areas-three">
+                                    <div class="three-left left">
+                                        <div class="top-areas"><span class='left'>经度</span></div>
+                                        <div class="bottom-areas"><span class='right'>30.24</span></div>
+                                    </div>
+                                    <div class="three-right right">
+                                        <div class="top-areas"><span class='left'>经度</span></div>
+                                        <div class="bottom-areas"><span class='right'>30.24</span></div>
+                                    </div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>管理单位</span></div>
+                                   <div class="bottom-areas"><span class='right'>市政管理局</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>负责人</span></div>
+                                   <div class="bottom-areas"><span class='right'>杨锋13923421100</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>巡查员</span></div>
+                                   <div class="bottom-areas"><span class='right'>杨那13923421101</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>建成日期</span></div>
+                                   <div class="bottom-areas"><span class='right'>1998.12.22</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>设计局</span></div>
+                                   <div class="bottom-areas"><span class='right'>杭州设计局</span></div>
+                               </div>
+                               <div class="areas-four">
+                                   <div class="top-areas"><span class='left'>危险加固记录</span></div>
+                                   <div class="four-areas">
+                                       <div class="four-areas-time left">1988.3</div>
+                                       <div class="four-areas-cons right">对灌溉涵管出现的蜂窝、管内壁砂浆剥蚀采取PCC-84型材料补强</div>
+                                   </div>
+                                   <div class="four-areas">
+                                       <div class="four-areas-time left">1996.3</div>
+                                       <div class="four-areas-cons right">对洪湖水库大坝外坡进行滤层翻修,兴建"W"导渗沟等工程</div>
+                                   </div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>施工单位</span></div>
+                                   <div class="bottom-areas"><span class='right'>中铁施工局</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>正常水位</span></div>
+                                   <div class="bottom-areas"><span class='right'>40.2m</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>汛限水位</span></div>
+                                   <div class="bottom-areas"><span class='right'>52.0m</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>防洪水位</span></div>
+                                   <div class="bottom-areas"><span class='right'>55.0m</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>校核洪水位</span></div>
+                                   <div class="bottom-areas"><span class='right'>40.06m</span></div>
+                               </div>
+                           </div>
+                        </div>
+                        <div class="det-box">
+                            <div class="small-detaill">
+                            <div class="detail-one">
+                                <div class="title-number left">1</div>
+                                <div class="title-name left">韩家坞水库</div>
+                                <div class='detail-btn right'>详细</div>
+                            </div>
+                            <div class="detail-two">
+                                <div class="left-con left">
+                                    <span class='left'>编号</span>
+                                    <b class='right'>B3301090918</b>
+                                </div>
+                                <div class="right-con right">
+                                    <span class='left'>容积(万方)</span>
+                                    <b class='right'>7.6</b>
+                                </div>
+                            </div>
+                            <div class="detail-three">
+                                <div class="left-con left">
+                                    <span class='left'>管理单位</span>
+                                    <b class='right'>市政管理局</b>
+                                </div>
+                                <div class="right-con right">
+                                    <span class='left'>维度</span>
+                                    <b class='right'>120.25</b>
+                                </div>
+                            </div>
+                            <div class="detail-four">
+                                <div class="left-con left">
+                                    <span class='left'>负责人</span>
+                                    <b class='right'>杨锋13923421100</b>
+                                </div>
+                                <div class="right-con right">
+                                    <span class='left'>经度</span>
+                                    <b class='right'>30.24</b>
+                                </div>
+                            </div>
+                            <div class="detail-five">
+                                <div class="left-five left">
+                                    <span class='left'>所属地区</span>
+                                    <b class='right'>南浔区菱湖镇千丰村</b>
+                                </div>
+                                <div class="right-five right">
+                                    <img src="images/icon.svg" class='right'>
+                                </div>
+                            </div>
+                           </div>
+                           <!-- 详细内容区域 -->
+                           <div class="detail-area">
+                               <div class="areas-one">
+                                   <div class="areas-one-con">
+                                       韩家坞水库建于1967年7月,大坝为均质土坝,最大坝高13.5米,坝顶黄海高程29.6米,坝顶宽4.5米,坝顶长1165米,保证灌溉面积1733.30公顷,以防洪灌溉为主,兼发电养鱼。
+                                   </div>
+                               </div>
+                               <div class="areas-two">
+                                   <ul class="areas-two-imgbox">
+                                       <li class='left'><img src="images/21.jpg"></li>
+                                       <li class='left'><img src="images/22.jpg"></li>
+                                       <li class='left'><img src="images/23.jpg"></li>
+                                   </ul>
+                                   实景图片
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>编号</span></div>
+                                   <div class="bottom-areas"><span class='right'>B3301090918</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>容积(万方)</span></div>
+                                   <div class="bottom-areas"><span class='right'>7.6</span></div>
+                               </div>
+                               <div class="areas-three">
+                                    <div class="three-left left">
+                                        <div class="top-areas"><span class='left'>经度</span></div>
+                                        <div class="bottom-areas"><span class='right'>30.24</span></div>
+                                    </div>
+                                    <div class="three-right right">
+                                        <div class="top-areas"><span class='left'>经度</span></div>
+                                        <div class="bottom-areas"><span class='right'>30.24</span></div>
+                                    </div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>管理单位</span></div>
+                                   <div class="bottom-areas"><span class='right'>市政管理局</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>负责人</span></div>
+                                   <div class="bottom-areas"><span class='right'>杨锋13923421100</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>巡查员</span></div>
+                                   <div class="bottom-areas"><span class='right'>杨那13923421101</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>建成日期</span></div>
+                                   <div class="bottom-areas"><span class='right'>1998.12.22</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>设计局</span></div>
+                                   <div class="bottom-areas"><span class='right'>杭州设计局</span></div>
+                               </div>
+                               <div class="areas-four">
+                                   <div class="top-areas"><span class='left'>危险加固记录</span></div>
+                                   <div class="four-areas">
+                                       <div class="four-areas-time left">1988.3</div>
+                                       <div class="four-areas-cons right">对灌溉涵管出现的蜂窝、管内壁砂浆剥蚀采取PCC-84型材料补强</div>
+                                   </div>
+                                   <div class="four-areas">
+                                       <div class="four-areas-time left">1996.3</div>
+                                       <div class="four-areas-cons right">对洪湖水库大坝外坡进行滤层翻修,兴建"W"导渗沟等工程</div>
+                                   </div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>施工单位</span></div>
+                                   <div class="bottom-areas"><span class='right'>中铁施工局</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>正常水位</span></div>
+                                   <div class="bottom-areas"><span class='right'>40.2m</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>汛限水位</span></div>
+                                   <div class="bottom-areas"><span class='right'>52.0m</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>防洪水位</span></div>
+                                   <div class="bottom-areas"><span class='right'>55.0m</span></div>
+                               </div>
+                               <div class="areas-three">
+                                   <div class="top-areas"><span class='left'>校核洪水位</span></div>
+                                   <div class="bottom-areas"><span class='right'>40.06m</span></div>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="js/map.js"></script>
+</body>
+</html>

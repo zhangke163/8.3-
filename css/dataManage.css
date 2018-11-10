@@ -1,0 +1,297 @@
+#map-box{
+    position: relative;
+    background: #E7E7E7;
+}
+/*左侧列表*/
+#left-list{
+    width: 242px;
+    padding-top:10px;
+    height:calc(100% - 10px);
+    background-color: #ffffff;
+    box-shadow: 0px 1px 2px 0px 
+        rgba(0, 64, 126, 0.3);
+    position: absolute;
+    left: 0;
+    top:0;
+}
+#left-list li{
+    width: 184px;
+    margin-left: 29px;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+}
+#left-list li img{
+    width: 21px;
+    height: 21px;
+    margin-right: 19px;
+    color: orange;
+    margin-top:14px;
+}
+/*查询大盒子*/
+#query-big{
+    width: 455px;
+    height: calc( 100% - 25px);
+    position: absolute;
+    left: 258px;
+    top:16px;
+}
+/*查询框*/
+#two-columns{
+    width:455px;
+    height:46px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 6px 0px 
+        rgba(0, 64, 126, 0.3);
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99;
+}
+#two-columns .layui-form-item .layui-input-inline{
+    width: 108px;
+    height: 31px;
+}
+.layui-input, .layui-textarea{
+    border-radius: 13px;
+    height: 31px;
+    margin-top:8px;
+    margin-left: 8px;
+    border: solid 1px #bbc3cc;
+    background-color: #f0f4f8;
+}
+.layui-form-select dl{
+    left: 10px;
+    top:38px;
+}
+.buts-box{
+    position: absolute;
+    top:0;
+    right: 9px;
+}
+.buts-box .layui-input-block button{
+    width: 81px;
+    height: 31px;
+    line-height: 32px;
+    margin-top:7px;
+    margin-right: 1px;
+    background-color: #0085fe;
+    border-radius: 13px;
+    font-size:14px;
+}
+.layui-btn{
+    padding:0;
+}
+.buts-box .layui-input-block button:nth-child(2){
+    width: 102px;
+    height: 29px;
+    background-color: #f0f4f8;
+    border-radius: 13px;
+    line-height: 29px;
+    border: solid 1px #bbc3cc;
+    color: #1789ff;
+    font-family: MicrosoftYaHei;
+}
+/*内容区域*/
+#columns-content{
+    width: 455px;
+    height: calc(100% - 59px);
+    background-color: #ffffff;
+    box-shadow: 0px 1px 2px 0px 
+        rgba(0, 64, 126, 0.3);
+    border-radius: 10px;
+    position: absolute;
+    top:59px;
+    left: 0;
+}
+.content-li{
+    width: 432px;
+    height: 93px;
+    border-bottom: 1px solid #d3dce6;
+    margin-left: 8px;
+}
+.conts-title{
+    width: 100%;
+    height: 52px;
+    line-height: 52px;
+}
+.conts-title .title-number{
+    width: 16px;
+    height: 16px;
+    background-color: #ff8f17;
+    border-radius: 50%;
+    color: #fff;
+    line-height: 16px;
+    text-align: center;
+    margin-top:18px;
+    margin-left: 13px;
+    margin-right: 5px;
+}
+.conts-title .title-name{
+    color: #1789ff;
+    font-size: 16px;
+}
+.conts-detail{
+    width: 100%;
+    height: 38px;
+    font-size: 12px;
+    line-height: 38px;
+}
+.conts-detail .detail-type{
+    margin-left: 13px;
+    color: #323232;
+}
+.conts-detail .detail-type b{
+    font-weight: normal;
+    color: #ff8f17;
+    padding-left: 8px;
+}
+.conts-detail .detail-time b{
+    font-weight: normal;
+    color: #ff8f17;
+    padding-left: 8px;
+}
+/*右侧大盒子*/
+.right-box{
+    width: calc(100% - 749px);
+    height: calc( 100% - 25px);
+    position: absolute;
+    right: 20px;
+    top:16px;
+    background:#E5E6E6;
+}
+.scroll-box{
+    width: 100%;
+    height: 291px;
+    background: #fff;
+    border-radius: 10px 10px 0 0;
+}
+#slide{
+    height: 263px;
+    width: 100%;
+}
+.detail-box{
+    width: 100%;
+    height: calc(100% - 303px);
+    margin-top:12px;
+    position: relative;
+}
+.pages{
+    width: calc(100% - 304px);
+    height: 100%;
+    background: #fff;
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    left: 0;
+    top:0;
+}
+.pages-detail{
+    width: 288px;
+    height: 100%;
+    background: #fff;
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    right: 0;
+    top:0;
+}
+.title{
+    height: 26px;
+    padding-left: 10px;
+    line-height: 26px;
+    color: #1689ff;
+    width: calc(100% - 10px);
+    border-bottom: 1px solid #d3dce6;
+}
+.page-img{
+    width: 100%;
+    height: calc(100% - 72px);
+    background: orange;
+}
+.page-img img{
+    width: 100%;
+    height: 100%;
+}
+.page-btn{
+    width: 100%;
+    height: 44px;
+}
+.page-cons{
+    width: 256px;
+    height: calc(100% - 65px);
+    margin-top:23px;
+    margin-left: 16px;
+}
+.grey-btn{
+    width: 80px;
+    height: 29px;
+    background-color: #f0f4f8;
+    border-radius: 13px;
+    border: solid 1px #bbc3cc;
+    margin-top:7px;
+    margin-left: 12px;
+    color: #7c7c7c;
+}
+.blue-btn{
+    width: 81px;
+    height: 31px;
+    background-color: #0085fe;
+    border-radius: 13px;
+    border: solid 0px #0085fe;
+    color: #fff;
+    margin-top:7px;
+    margin-left: 28px;
+    margin-right: 12px;
+}
+.table-row{
+    width:100%;
+    min-height: 24px;
+    margin-bottom: 8px; 
+}
+.table-row label{
+    display: block;
+    width: 66px;
+    height: 100%;
+    font-size: 12px;
+}
+.table-row  input{
+    width: 188px;
+    height: 24px;
+    border: solid 1px #e6e6e6;
+    font-size: 12px;
+}
+.table-row1{
+    height: 100px;
+}
+.table-row1 label{
+    display: block;
+    width: 66px;
+    height: 100%;
+    font-size: 12px;
+}
+.table-row1  textarea{
+    width: 188px;
+    height:95px;
+    border: solid 1px #e6e6e6;
+    font-size: 12px;
+}
+.show-detail{
+    width: 100%;
+    height: 150px;
+}
+.detail-row{
+    height: 40px;
+    line-height: 40px;
+}
+.detail-row span{
+    color: #323232;
+    margin-right: 10px;
+    font-size: 12px;
+}
+.detail-row b{
+    color: #ff8f17;
+    font-size: 12px;
+}
+textarea:disabled{
+    background: #fff;
+}

@@ -1,0 +1,75 @@
+body,html{
+	width:100%;
+	height: 100%;
+	/*background: pink;*/
+}
+header{
+	width:100%;
+	height: 50px;
+	background-image: url(../images/bg.png);
+	background-size: cover;
+	line-height: 50px;
+	color: #fff;
+}
+header h1{
+	font-size: 20px;
+	padding-left: 30px;
+	font-weight: normal;
+	font-family: FZZXHJW--GB1-0;
+}
+header ul.right li{
+	width:80px;
+	cursor: pointer;
+}
+header ul.right li a{
+	display: block;
+	width: 80px;
+	height: 50px;
+	color: #fff;
+}
+header ul.right li.borderh{
+	height: 50px;
+	text-align: center;
+	margin-right: 15px;
+	box-sizing: border-box;
+	border-bottom:4px solid transparent;
+}
+header ul.right li.borderStyle{
+	border-bottom:4px solid #85d0ff;
+}
+header ul.right li:nth-child(3){
+	width: 1px;
+	height: 36px;
+	background-color: #005bb9;
+	margin-top:7px;
+}
+header ul.right li:nth-child(4){
+	width:120px;
+}
+header ul.right li:nth-child(4) .people{
+	width: 24px;
+	height: 24px;
+	background: url(../images/people.png);
+	background-size: cover;
+	margin-top:14px;
+	margin-left: 12px;
+	margin-right: 9px;
+}
+header ul.right li:nth-child(4) .people-text{
+	width:42px;
+}
+header ul.right li:nth-child(4) .people-select{
+	width: 12px;
+	height:12px;
+	margin-top:20px;
+	margin-left: 5px;
+}
+header ul.right li:nth-child(4) .people-select img{
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+section{
+	width: 100%;
+	height: calc(100% - 50px);
+}

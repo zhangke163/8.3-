@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>防汛防台形势图主页</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" type="text/css" href="css/public.css">
+  <link rel="stylesheet" href="layui/css/layui.css" /> 
+  <link rel="stylesheet" type="text/css" href="css/header.css">
+  <link rel="stylesheet" type="text/css" href="css/dataManage.css">
+  <link rel="stylesheet" type="text/css" href="css/screen.css">
+  <link rel="stylesheet" type="text/css" href="css/css.css">
+  <script src="assets/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+  <script type="text/javascript" src="layui/layui.js"></script> 
+  <script type="text/javascript" src="assets/data.js"></script>
+  <script type="text/javascript" src="assets/province.js"></script>
+  <script type="text/javascript" src="js/floodIndex.js"></script>
+  <script type="text/javascript" src='js/jquery1.0.0.1.js'></script>
+  <script src="js/myindex.js"></script>
+  <script type="text/javascript">
+         var defaults = {
+            s1: 'provid',
+            s2: 'cityid',
+            s3: 'areaid',
+            v1: null,
+            v2: null,
+            v3: null
+        };
+
+    </script>
+</head>
+<body>
+	<header>
+		<h1 class='left'>防汛防台管理系统</h1>
+		<ul class="right">
+			<li class='left borderh'><a href="floodIndex.html">地图展示</a></li>
+			<li class='left borderh borderStyle'><a href="#">数据管理</a></li>
+			<li class='left line'></li>
+			<li class='left'>
+				<div class="people left"></div>
+				<div class="people-text left">管理员</div>
+				<div class="people-select left"><img src="images/pselect.png"></div>
+			</li>
+		</ul>
+	</header>
+	<section id='map-box'>
+		<!-- 左侧列表 -->
+		<ul id="left-list">
+			<li>
+				<img src="images/one0hover.svg" id='one-img'>
+				<span style='color:#1789FF'>三防图生成</span>
+			</li>
+			<li>
+				<img src="images/one1.svg" id='two-img'><span>已生成三防图</span>
+			</li>
+			<li>
+				<img src="images/one2.svg" id='three-img'><span>浏览历史</span>
+			</li>
+			<li>
+				<img src="images/one3.svg" id='four-img'><span>信息管理</span>
+			</li>
+			<li>
+				<img src="images/one4.svg" id='five-img'><span>系统设置</span>
+			</li>
+		</ul>
+		<!-- 查询大盒子 -->
+		<div id="query-big">
+			<!-- 三级联动 -->
+			<div id='two-columns'>
+		        <form class="layui-form" lay-filter='form-city'>
+		            <div class="layui-form-item">
+		                <div class="layui-input-inline">
+		                    <select name="provid" id="provid" lay-filter="provid">
+		                        <option value="">请选择镇</option>
+		                    </select>
+		                </div>
+		                <div class="layui-input-inline">
+		                    <select name="cityid" id="cityid" lay-filter="cityid">
+		                        <option value="">行政村</option>
+		                    </select>
+		                </div>
+		                <div class="layui-input-inline">
+		                    <select name="areaid" id="areaid" lay-filter="areaid">
+		                        <option value="">自然村</option>
+		                    </select>
+		                </div>
+		            </div>
+		            <div class="layui-form-item buts-box">
+		                <div class="layui-input-block">
+		                    <button class="layui-btn" lay-submit lay-filter="query" id='query' name='query'>查询</button>
+		                </div>
+		            </div>
+		        </form>
+		    </div>
+		    <!-- 内容区域 -->
+		    <div id="columns-content">
+		    	<div class="content-li">
+		    		<div class="conts-title">
+		    			<div class="title-number left">1</div>
+		    			<div class="title-name left">千丰村防汛防台形势图</div>
+		    		</div>
+		    		<div class="conts-detail">
+		    			<div class="detail-type left">
+		    				<span class='left'>类型:</span>
+		    				<b class='left'>村级形势图</b>
+		    			</div>
+		    			<div class="detail-time right">
+		    				<span class='left'>生成时间</span>
+		    				<b class='left'>2018/05/23 16:12</b>
+		    			</div>
+		    		</div>
+		    	</div>
+		    	<div class="content-li">
+		    		<div class="conts-title">
+		    			<div class="title-number left">1</div>
+		    			<div class="title-name left">千丰村防汛防台形势图</div>
+		    		</div>
+		    		<div class="conts-detail">
+		    			<div class="detail-type left">
+		    				<span class='left'>类型:</span>
+		    				<b class='left'>村级形势图</b>
+		    			</div>
+		    			<div class="detail-time right">
+		    				<span class='left'>生成时间</span>
+		    				<b class='left'>2018/05/23 16:12</b>
+		    			</div>
+		    		</div>
+		    	</div>
+		    	<div class="content-li">
+		    		<div class="conts-title">
+		    			<div class="title-number left">1</div>
+		    			<div class="title-name left">千丰村防汛防台形势图</div>
+		    		</div>
+		    		<div class="conts-detail">
+		    			<div class="detail-type left">
+		    				<span class='left'>类型:</span>
+		    				<b class='left'>村级形势图</b>
+		    			</div>
+		    			<div class="detail-time right">
+		    				<span class='left'>生成时间</span>
+		    				<b class='left'>2018/05/23 16:12</b>
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+		</div>
+		<!-- 右侧大盒子 -->
+		<div class="right-box">
+			<!-- 轮播图 -->
+			<div class="scroll-box">
+				<div class="title">样式预览</div>
+				<div class="wrap" id="wrap">
+			       <div class="slide" id="slide">
+			           <ul>
+			               <!--五张图片-->
+			               <li><a href="#"><img src="images/tp.jpg"></a></li>
+			               <li><a href="#"><img src="images/tp.jpg"></a></li>
+			               <li><a href="#"><img src="images/tp.jpg"></a></li>
+			           </ul>
+			           <!--左右切换按钮-->
+			           <div class="arrow" id="arrow">
+			               <a href="javascript:;" class="prev"></a>
+			               <a href="javascript:;" class="next"></a>
+			           </div>
+			       </div>
+			    </div>
+			</div>
+			<!-- 详细信息 -->
+			<div class="detail-box">
+				<!-- 左侧嵌入页面 -->
+				<div class="pages">
+					<div class="title">形势图编辑</div>
+					<div class="page-img"><img src="images/tp.jpg"></div>
+					<div class="page-btn">
+						<button class='left grey-btn'>编辑信息</button>
+						<button class='right blue-btn'>生成</button>
+						<button class='right grey-btn'>更换样式</button>
+					</div>
+				</div>
+				<!-- 右侧详细信息展示 -->
+				<div class="pages-detail">
+					<div class="title">属性信息</div>
+					<div class="page-cons">
+						<form>
+							<div class="table-row">	
+									<label class='left'> 名称：</label>
+									<input type="" name="" value='菱湖镇千丰村防汛防台形势图' class='left' disabled>
+							</div>	
+							<div class="table-row">	
+									<label class='left'> 所属片区：</label>
+									<input type="" name="" value='南浔片区' class='left' disabled>
+							</div>	
+							<div class="table-row">	
+									<label class='left'>	中心维度：</label>
+									<input type="" name="" value='120.9756' class='left' disabled>
+							</div>	
+							<div class="table-row">	
+									<label class='left'>	中心维度：</label>
+									<input type="" name="" value='31.5236' class='left' disabled>
+							</div>	
+							<div class="table-row1">	
+									<label class='left'>	备注信息：</label>
+									<textarea class='left' resize='none' disabled>
+										片区负责人 方延军  联系电话：13467138800
+									</textarea>
+							</div>		
+						</form>
+						<div class="show-detail">
+							<div class="detail-row">
+								<div class="left">
+									<span>是否编辑：</span>
+									<b>否</b>
+								</div>	
+								<div class="right">
+									<span>生成账号：</span>
+									<b>admin</b>
+								</div>	
+							</div>	
+							<div class="detail-row">
+								<div class="left">
+									<span>所属城镇：</span>
+									<b>菱湖镇</b>
+								</div>	
+								<div class="right">
+									<span>人口：</span>
+									<b>1378</b>
+								</div>	
+							</div>	
+							<div class="detail-row">
+								<div class="left">
+									<span>生成时间：</span>
+									<b>2018/7/21 09:15</b>
+								</div>	
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

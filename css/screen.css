@@ -1,0 +1,52 @@
+@media screen and (min-width:1280px) and (max-width:1439px){
+	.bot-small-cons{
+		width: 100%;
+	}
+	#bot-main{
+		height: 94px;
+	}
+	.bot-main-content{
+		height: 65px;
+	}
+	.bot-main-content{
+		margin-top:4px;
+	}
+	.bot-small-cons{
+		margin-bottom: 2px;
+	}
+	.name-box{
+		padding:0 21px;
+	}
+}
+@media screen and (min-width:1440px) and (max-width:1919px){
+	.bot-small-cons{
+		width: 386px;
+	}
+	.bot-small-cons{
+		width: 340px;
+		height: 20px;
+		background-color: transparent;
+		border-radius: 8px;
+	}
+	.small-name{
+		width: 65px;
+		height: 18px;
+		font-size: 12px;
+		background-color: #1789ff;
+		border-radius: 8px;
+		text-align:center;
+		color: #ffffff;
+	}
+	.name-box{
+		padding:0 5px;
+	}
+	.bot-main-content{
+		margin-top:7px;
+		height: 38px;
+	}
+}
+@media screen and (min-width:1920px){
+	.bot-small-cons{
+		width: 386px;
+	}
+}
